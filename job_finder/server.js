@@ -161,6 +161,17 @@ After all searches are complete, return ONLY a valid JSON object — no markdown
 
 IMPORTANT: Only include jobs with real URLs found via search. Do not fabricate listings.`;
 
+function extractJSON(text) {
+  // Strip code fences
+  let s = text.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '').trim();
+  // If it starts with { we're done
+  if (s.startsWith('{')) return s;
+  // Otherwise find the first { ... } block in the text
+  const match = s.match(/\{[\s\S]*\}/);
+  if (match) return match[0];
+  return s;
+}
+
 async function runClaudeJobSearch(resumeText) {
   const messages = [
     {
@@ -203,9 +214,8 @@ async function runClaudeJobSearch(resumeText) {
       const textBlock = response.content.find(b => b.type === 'text');
       if (!textBlock) throw new Error('Claude returned no text in final response.');
       const raw = textBlock.text.trim();
-      // Strip markdown code fences if Claude wrapped the JSON despite instructions
-      const jsonText = raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '').trim();
-      console.log('Claude final response (first 300 chars):', jsonText.slice(0, 300));
+      console.log('Claude raw response (first 500 chars):', raw.slice(0, 500));
+      const jsonText = extractJSON(raw);
       return JSON.parse(jsonText);
     }
 
