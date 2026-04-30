@@ -4,11 +4,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Git & GitHub Workflow
 
-After completing any meaningful unit of work — a feature, a fix, a refactor — commit and push to GitHub immediately. Never let completed work sit uncommitted.
+Commit and push proactively throughout development — don't wait to be asked. Use Git as a running record of progress, not just a final checkpoint.
 
+**When to commit (do this without being asked):**
+- After scaffolding a new file or directory structure
+- After each logical unit of work: a working feature, a bug fix, a refactor, a config change
+- After updating CLAUDE.md or other documentation
+- Whenever a meaningful, self-contained change is in place — even mid-task if the next step is risky or experimental
+
+**Rules:**
 - Write clean, descriptive commit messages that explain *what* changed and *why* (not just "update file")
 - Push to the remote after every commit so work is never only local
-- This applies to all projects, not just this one
+- Never let a completed session end with uncommitted work
+- This applies to all projects in this repo
 
 ## Projects
 
