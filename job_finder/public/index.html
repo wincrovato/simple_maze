@@ -374,7 +374,7 @@
       selectFile(e.dataTransfer.files[0]);
     });
     dropZone.addEventListener('click', e => {
-      if (e.target !== fileInput) fileInput.click();
+      if (e.target !== fileInput && !e.target.closest('label')) fileInput.click();
     });
 
     function selectFile(file) {
