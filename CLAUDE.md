@@ -2,6 +2,14 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Git & GitHub Workflow
+
+After completing any meaningful unit of work — a feature, a fix, a refactor — commit and push to GitHub immediately. Never let completed work sit uncommitted.
+
+- Write clean, descriptive commit messages that explain *what* changed and *why* (not just "update file")
+- Push to the remote after every commit so work is never only local
+- This applies to all projects, not just this one
+
 ## Running the Game
 
 Open `simple_maze.html` directly in a browser — no build step, no server required.
