@@ -202,7 +202,11 @@ async function runClaudeJobSearch(resumeText) {
     if (response.stop_reason === 'end_turn') {
       const textBlock = response.content.find(b => b.type === 'text');
       if (!textBlock) throw new Error('Claude returned no text in final response.');
-      return JSON.parse(textBlock.text);
+      const raw = textBlock.text.trim();
+      // Strip markdown code fences if Claude wrapped the JSON despite instructions
+      const jsonText = raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '').trim();
+      console.log('Claude final response (first 300 chars):', jsonText.slice(0, 300));
+      return JSON.parse(jsonText);
     }
 
     if (response.stop_reason === 'tool_use') {
