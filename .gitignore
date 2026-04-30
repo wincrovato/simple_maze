@@ -1,1 +1,3 @@
 .DS_Store
+job_finder/.env
+job_finder/node_modules/
